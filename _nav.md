@@ -1,0 +1,6 @@
+- [Home](Home.md)
+- [Hinweise für SystembibliothekarInnen](Hinweise-für-SystembibliothekarInnen-(Konfiguration).md)
+  - Benutzer, Berechtigungen und Rollen
+    - [Benutzer 3.x](Benutzer-3.x.md)
+    - [Berechtigungen und Rollen 3.x](Berechtigungen-und-Rollen-3.x.md)
+- [Community Board](Community-Board-(Kitodo.Production).md)
