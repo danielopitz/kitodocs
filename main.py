@@ -189,6 +189,8 @@ def get_view_edit(md_filename: str) -> str:
 
 def main():
     subprocess.run(["zensical", "new", "."])
+    (Path("./docs") / "index.md").unlink(missing_ok=True)
+    (Path("./docs") / "markdown.md").unlink(missing_ok=True)
     if REPO_DIR.exists():
         shutil.rmtree(REPO_DIR)
     subprocess.run(["git", "clone", REPO_URL, str(REPO_DIR.absolute())])
@@ -213,6 +215,9 @@ def main():
         shutil.copy(Path("_nav.md"), DOCS_DIR / "_nav.md")
     with open(DOCS_DIR / "_nav.md") as nf:
         data = parse_markdown_nav(nf.read())
+        min(data[0].items())[1]
+        if not (DOCS_DIR / "index.md").exists():
+            shutil.copy(DOCS_DIR / min(data[0].items())[1], DOCS_DIR / "index.md")
         nav = format_top_level_list_of_dicts(data)
     with open(ZENSICAL_CONFIG, "w") as f:
         zout = []
