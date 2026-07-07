@@ -217,6 +217,7 @@ def main():
         data = parse_markdown_nav(nf.read())
         if not (DOCS_DIR / "index.md").exists():
             shutil.copy(DOCS_DIR / min(data[0].items())[1], DOCS_DIR / "index.md")
+            data[0][min(data[0].keys())] = "index.md"
         nav = format_top_level_list_of_dicts(data)
     with open(ZENSICAL_CONFIG, "w") as f:
         zout = []
