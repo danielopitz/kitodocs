@@ -215,7 +215,6 @@ def main():
         shutil.copy(Path("_nav.md"), DOCS_DIR / "_nav.md")
     with open(DOCS_DIR / "_nav.md") as nf:
         data = parse_markdown_nav(nf.read())
-        min(data[0].items())[1]
         if not (DOCS_DIR / "index.md").exists():
             shutil.copy(DOCS_DIR / min(data[0].items())[1], DOCS_DIR / "index.md")
         nav = format_top_level_list_of_dicts(data)
