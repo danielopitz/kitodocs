@@ -170,7 +170,7 @@ def fix_list_spacing(text: str) -> str:
     lines = text.splitlines()
     out = []
 
-    for i, line in enumerate(lines):
+    for line in lines:
         is_list = bool(LIST_RE.match(line))
         if is_list and out:
             prev = out[-1]
@@ -179,7 +179,34 @@ def fix_list_spacing(text: str) -> str:
                 out.append("")
         out.append(line)
 
-    # preserve trailing newline style (optional simple behavior)
+    # preserve trailing newline style
+    return "\n".join(out) + ("\n" if text.endswith("\n") else "")
+
+
+def fix_list_indentation(text: str) -> str:
+    lines = text.splitlines()
+    out = []
+
+    is_in_list = False
+    tab_size = 0
+
+    for line in lines:
+        if line.startswith(("*", "-")) and not is_in_list:
+            is_in_list = True
+            continue
+
+        if is_in_list and not line.lstrip().startswith(("*", "-")):
+            is_in_list = False
+            tab_size = 0
+            continue
+
+        diff = len(line) - len(line.lstrip(" "))
+        if diff > 0:
+            if tab_size == 0:
+                tab_size = diff
+            elif tab_size == 2:
+                line = (" " * diff) + line
+
     return "\n".join(out) + ("\n" if text.endswith("\n") else "")
 
 
@@ -199,6 +226,7 @@ def main():
             with open(DOCS_DIR / md_file.name, "w") as of:
                 content = f.read()
                 content = fix_list_spacing(content)
+                content = fix_list_indentation(content)
                 for line in content.splitlines():
                     line = replace_wikilinks_in_text(line)
                     line = fix_anchors_in_line(line)
