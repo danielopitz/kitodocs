@@ -193,11 +193,13 @@ def fix_list_indentation(text: str) -> str:
     for line in lines:
         if line.startswith(("*", "-")) and not is_in_list:
             is_in_list = True
+            out.append(line)
             continue
 
         if is_in_list and not line.lstrip().startswith(("*", "-")):
             is_in_list = False
             tab_size = 0
+            out.append(line)
             continue
 
         diff = len(line) - len(line.lstrip(" "))
@@ -206,6 +208,7 @@ def fix_list_indentation(text: str) -> str:
                 tab_size = diff
             elif tab_size == 2:
                 line = (" " * diff) + line
+        out.append(line)
 
     return "\n".join(out) + ("\n" if text.endswith("\n") else "")
 
