@@ -196,7 +196,7 @@ def fix_list_indentation(text: str) -> str:
             out.append(line)
             continue
 
-        if is_in_list and not line.lstrip().startswith(("*", "-")):
+        if not line.lstrip().startswith(("*", "-")):
             is_in_list = False
             tab_size = 0
             out.append(line)
@@ -206,7 +206,7 @@ def fix_list_indentation(text: str) -> str:
         if diff > 0:
             if tab_size == 0:
                 tab_size = diff
-            elif tab_size == 2:
+            if tab_size == 2:
                 line = (" " * diff) + line
         out.append(line)
 
@@ -218,6 +218,8 @@ def get_view_edit(md_filename: str) -> str:
 
 
 def main():
+    shutil.rmtree(Path("./docs"), ignore_errors=True)
+    Path("./zensical.toml").unlink(missing_ok=True)
     subprocess.run(["zensical", "new", "."])
     (Path("./docs") / "index.md").unlink(missing_ok=True)
     (Path("./docs") / "markdown.md").unlink(missing_ok=True)
