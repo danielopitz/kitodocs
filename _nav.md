@@ -1,6 +1,24 @@
 - [Home](Home.md)
-- [Hinweise für SystembibliothekarInnen](Hinweise-für-SystembibliothekarInnen-(Konfiguration).md)
+- [Community Board](Community-Board-(Kitodo.Production).md)
+- [Handbuch für Anwender](Anwenderdokumentation-Kitodo.Production-3.x.md)
+- [Installation](Installationsanleitung.md)
+  - [Systemanforderungen](Systemanforderungen.md)
+  - Anleitungen
+    - [Kitodo.Production 4](Installationsanleitung-für-Kitodo.Production-4.md)
+- [Konfiguration](Hinweise-für-SystembibliothekarInnen-(Konfiguration).md)
   - Benutzer, Berechtigungen und Rollen
     - [Benutzer 3.x](Benutzer-3.x.md)
     - [Berechtigungen und Rollen 3.x](Berechtigungen-und-Rollen-3.x.md)
-- [Community Board](Community-Board-(Kitodo.Production).md)
+    - [Rechte (Berechtigungen) und Rollen](Rechte-(Berechtigungen)-und-Rollen.md)
+  - Projekte
+    - [Bearbeitung Projekte 3.x](Bearbeitung-Projekte-3.x.md)
+  - Workflow
+    - [Kitodo-Workflow 3.x](Kitodo‐Workflow-3.x.md)
+    - [Workflow-Editor](Workflow-Editor.md)
+  - Konfigurationsdateien
+    - [Regelsatz 3.x](Regelsatz-3.x.md)
+    - [Konfiguration Laufzettel in Kitodo.Production 3](Konfiguration-Laufzettel-in-Kitodo.Production-3.md)
+  - Weitere Informationen
+    - [Metadaten Skripte](Metadaten-Skripte.md)
+    - [Vorgänge löschen](Vorgänge-löschen.md)
+- [Hinweise für Entwickler](Hinweise-für-Entwickler.md)
