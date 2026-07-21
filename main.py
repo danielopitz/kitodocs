@@ -149,6 +149,8 @@ def fix_anchors_in_line(line: str) -> str:
 def target_to_filename(target: str) -> str:
     target = target.strip()
     target = re.sub(r"\s+", "-", target)
+    if target not in PAGE_FILENAMES and target.lower() in CASE_INSENSITIVE_PAGE_MAP:
+        target = CASE_INSENSITIVE_PAGE_MAP[target.lower()]
     return f"{target}.md"
 
 
