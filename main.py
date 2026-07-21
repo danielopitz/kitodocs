@@ -26,6 +26,9 @@ BLOCK_RE = re.compile(
 MD_LINK_RE = re.compile(r"(\[[^\]]+\]\()([^)]+)(\))")
 WIKI_PREFIX = "https://github.com/kitodo/kitodo-production/wiki/"
 
+CASE_INSENSITIVE_PAGE_MAP: dict[str, str] = {}
+PAGE_FILENAMES = set()
+
 
 def convert_wiki_url_target(target: str) -> str:
     if "#" in target:
@@ -38,6 +41,8 @@ def convert_wiki_url_target(target: str) -> str:
         return target
 
     page = unquote(base[len(WIKI_PREFIX) :].strip()).replace("/", "-")
+    if page not in PAGE_FILENAMES and page.lower() in CASE_INSENSITIVE_PAGE_MAP:
+        page = CASE_INSENSITIVE_PAGE_MAP[page.lower()]
     if not page.endswith(".md"):
         page += ".md"
     return page + frag
@@ -226,6 +231,9 @@ def main():
     if REPO_DIR.exists():
         shutil.rmtree(REPO_DIR)
     subprocess.run(["git", "clone", REPO_URL, str(REPO_DIR.absolute())])
+    for md_file in REPO_DIR.rglob("*.md"):
+        CASE_INSENSITIVE_PAGE_MAP[md_file.stem.lower()] = md_file.stem
+        PAGE_FILENAMES.add(md_file.stem)
     for md_file in REPO_DIR.rglob("*.md"):
         with open(md_file) as f:
             with open(DOCS_DIR / md_file.name, "w") as of:
